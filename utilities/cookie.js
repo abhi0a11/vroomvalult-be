@@ -18,12 +18,15 @@ export const sendCookie = async (user, res, message, statusCode) => {
         samesite: process.env.NODE_ENV === "Development" ? "lax" : "none",
         secure: process.env.NODE_ENV === "Development" ? false : true,
         maxAge: 15 * 60 * 1000,
+        credentials: true,
       })
       .json({
         success: true,
+        user,
         message: message,
       });
   } catch (error) {
+    console.log(error);
     console.log("errro in cookie");
   }
 };
